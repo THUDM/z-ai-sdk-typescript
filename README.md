@@ -4,6 +4,10 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
 
+[中文文档](README_CN.md) | English
+
+**Not yet released.**
+
 A modern, type-safe TypeScript SDK for the ZAI API, inspired by the OpenAI SDK design patterns.
 
 ## ✨ Features
