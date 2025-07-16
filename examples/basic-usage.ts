@@ -9,7 +9,7 @@ const client = new ZAI({
 const zhipuClient = ZAI.ofZHIPU(process.env.ZAI_API_KEY || '');
 
 // Method 3: Use static factory method for ZAI environment
- const zaiClient = ZAI.ofZAI(process.env.ZAI_API_KEY || 'your-api-key.secret');
+const zaiClient = ZAI.ofZAI(process.env.ZAI_API_KEY || 'your-api-key.secret');
 
 async function basicChatExample() {
   console.log('=== Basic Chat Example ===');

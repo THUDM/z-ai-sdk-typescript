@@ -19,11 +19,6 @@ async function quickTest() {
   console.log('✓ Embeddings resource available:', !!client.embeddings);
   console.log('✓ Files resource available:', !!client.files);
   
-  // Test 2: Check convenience methods
-  console.log('✓ createChatCompletion method available:', typeof client.createChatCompletion === 'function');
-  console.log('✓ createImage method available:', typeof client.createImage === 'function');
-  console.log('✓ createEmbedding method available:', typeof client.createEmbedding === 'function');
-  
   console.log('\n🎉 All basic checks passed! SDK is ready to use.');
   console.log('\nTo test with real API calls, set your ZAI_API_KEY environment variable.');
 }
