@@ -1,8 +1,5 @@
 import { BaseAPI } from "../core/base-api";
-import {
-  ChatCompletionCreateParams,
-  ChatCompletion,
-} from "../types/chat";
+import { ChatCompletionCreateParams, ChatCompletion } from "../types/chat";
 import { RequestOptions } from "../types/client";
 
 /**
