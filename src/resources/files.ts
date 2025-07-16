@@ -1,12 +1,12 @@
-import { BaseAPI } from '../core/base-api';
+import { BaseAPI } from "../core/base-api";
 import {
   FileCreateParams,
   FileListParams,
   FileObject,
   FileListResponse,
   FileDeleteResponse,
-} from '../types/files';
-import { RequestOptions } from '../types/client';
+} from "../types/files";
+import { RequestOptions } from "../types/client";
 
 /**
  * Files API
@@ -17,18 +17,18 @@ export class Files extends BaseAPI {
    */
   async create(
     params: FileCreateParams,
-    options?: RequestOptions
+    options?: RequestOptions,
   ): Promise<FileObject> {
     const formData = new FormData();
-    
+
     if (params.file instanceof Buffer) {
       const blob = new Blob([params.file]);
-      formData.append('file', blob, params.filename || 'file');
+      formData.append("file", blob, params.filename || "file");
     } else {
-      formData.append('file', params.file as Blob, params.filename);
+      formData.append("file", params.file as Blob, params.filename);
     }
-    
-    formData.append('purpose', params.purpose);
+
+    formData.append("purpose", params.purpose);
 
     const mergedOptions = this.mergeOptions(options, {
       timeout: params.timeout,
@@ -36,7 +36,11 @@ export class Files extends BaseAPI {
     });
 
     try {
-      return await this.client.postForm<FileObject>('/files', formData, mergedOptions);
+      return await this.client.postForm<FileObject>(
+        "/files",
+        formData,
+        mergedOptions,
+      );
     } catch (error) {
       this.handleError(error);
     }
@@ -47,16 +51,16 @@ export class Files extends BaseAPI {
    */
   async list(
     params?: FileListParams,
-    options?: RequestOptions
+    options?: RequestOptions,
   ): Promise<FileListResponse> {
     const queryParams = new URLSearchParams();
-    
-    if (params?.purpose) queryParams.append('purpose', params.purpose);
-    if (params?.order) queryParams.append('order', params.order);
-    if (params?.limit) queryParams.append('limit', params.limit.toString());
-    if (params?.after) queryParams.append('after', params.after);
 
-    const url = `/files${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
+    if (params?.purpose) queryParams.append("purpose", params.purpose);
+    if (params?.order) queryParams.append("order", params.order);
+    if (params?.limit) queryParams.append("limit", params.limit.toString());
+    if (params?.after) queryParams.append("after", params.after);
+
+    const url = `/files${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
 
     const mergedOptions = this.mergeOptions(options, {
       timeout: params?.timeout,
@@ -75,7 +79,7 @@ export class Files extends BaseAPI {
    */
   async retrieve(
     fileId: string,
-    options?: RequestOptions
+    options?: RequestOptions,
   ): Promise<FileObject> {
     try {
       return await this.client.get<FileObject>(`/files/${fileId}`, options);
@@ -89,10 +93,13 @@ export class Files extends BaseAPI {
    */
   async del(
     fileId: string,
-    options?: RequestOptions
+    options?: RequestOptions,
   ): Promise<FileDeleteResponse> {
     try {
-      return await this.client.delete<FileDeleteResponse>(`/files/${fileId}`, options);
+      return await this.client.delete<FileDeleteResponse>(
+        `/files/${fileId}`,
+        options,
+      );
     } catch (error) {
       this.handleError(error);
     }
@@ -106,10 +113,7 @@ export class Files extends BaseAPI {
   /**
    * Returns the contents of the specified file
    */
-  async content(
-    fileId: string,
-    options?: RequestOptions
-  ): Promise<string> {
+  async content(fileId: string, options?: RequestOptions): Promise<string> {
     try {
       return await this.client.get<string>(`/files/${fileId}/content`, options);
     } catch (error) {

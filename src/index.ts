@@ -14,6 +14,3 @@ export * from './core/constants';
 
 // Resource classes for advanced usage
 export { Chat, Images, Embeddings, Files } from './resources';
-
-// Version
-export const VERSION = '1.0.0';

@@ -1,6 +1,9 @@
-import { BaseAPI } from '../core/base-api';
-import { EmbeddingCreateParams, CreateEmbeddingResponse } from '../types/embeddings';
-import { RequestOptions } from '../types/client';
+import { BaseAPI } from "../core/base-api";
+import {
+  EmbeddingCreateParams,
+  CreateEmbeddingResponse,
+} from "../types/embeddings";
+import { RequestOptions } from "../types/client";
 
 /**
  * Embeddings API
@@ -11,7 +14,7 @@ export class Embeddings extends BaseAPI {
    */
   async create(
     params: EmbeddingCreateParams,
-    options?: RequestOptions
+    options?: RequestOptions,
   ): Promise<CreateEmbeddingResponse> {
     const requestBody = {
       input: params.input,
@@ -22,7 +25,7 @@ export class Embeddings extends BaseAPI {
     };
 
     // Remove undefined values
-    Object.keys(requestBody).forEach(key => {
+    Object.keys(requestBody).forEach((key) => {
       if (requestBody[key as keyof typeof requestBody] === undefined) {
         delete requestBody[key as keyof typeof requestBody];
       }
@@ -34,7 +37,11 @@ export class Embeddings extends BaseAPI {
     });
 
     try {
-      return await this.client.post<CreateEmbeddingResponse>('/embeddings', requestBody, mergedOptions);
+      return await this.client.post<CreateEmbeddingResponse>(
+        "/embeddings",
+        requestBody,
+        mergedOptions,
+      );
     } catch (error) {
       this.handleError(error);
     }

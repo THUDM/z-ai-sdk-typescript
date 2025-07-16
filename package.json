@@ -1,6 +1,6 @@
 {
-  "name": "z-ai-sdk-typescript",
-  "version": "1.0.0",
+  "name": "zai-sdk",
+  "version": "0.0.1-beta",
   "description": "TypeScript SDK for ZAI API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

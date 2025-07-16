@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 /**
  * Token cache to store generated tokens
@@ -20,21 +20,27 @@ const tokenCache: TokenCache = {};
  * @param cache - Whether to cache the token
  * @returns JWT token string
  */
-export function generateToken(apiSecretKey: string, cache: boolean = true): string {
+export function generateToken(
+  apiSecretKey: string,
+  cache: boolean = true,
+): string {
   try {
     // Check cache first
     if (cache && tokenCache[apiSecretKey]) {
       const cachedToken = tokenCache[apiSecretKey];
-      const isValid = Date.now() - cachedToken.createdAt < CACHE_TTL_SECONDS * 1000;
+      const isValid =
+        Date.now() - cachedToken.createdAt < CACHE_TTL_SECONDS * 1000;
       if (isValid) {
         return cachedToken.token;
       }
     }
 
     // Parse API key and secret
-    const parts = apiSecretKey.split('.');
+    const parts = apiSecretKey.split(".");
     if (parts.length !== 2) {
-      throw new Error('Invalid API key format. Expected format: "apiKey.secret"');
+      throw new Error(
+        'Invalid API key format. Expected format: "apiKey.secret"',
+      );
     }
 
     const [apiKey, secret] = parts;
@@ -48,10 +54,10 @@ export function generateToken(apiSecretKey: string, cache: boolean = true): stri
 
     // Generate JWT token
     const token = jwt.sign(payload, secret, {
-      algorithm: 'HS256',
+      algorithm: "HS256",
       header: {
-        alg: 'HS256',
-        sign_type: 'SIGN',
+        alg: "HS256",
+        sign_type: "SIGN",
       } as any,
     });
 
@@ -65,7 +71,9 @@ export function generateToken(apiSecretKey: string, cache: boolean = true): stri
 
     return token;
   } catch (error) {
-    throw new Error(`Failed to generate authentication token: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    throw new Error(
+      `Failed to generate authentication token: ${error instanceof Error ? error.message : "Unknown error"}`,
+    );
   }
 }
 
@@ -73,7 +81,7 @@ export function generateToken(apiSecretKey: string, cache: boolean = true): stri
  * Clear the token cache
  */
 export function clearTokenCache(): void {
-  Object.keys(tokenCache).forEach(key => {
+  Object.keys(tokenCache).forEach((key) => {
     delete tokenCache[key];
   });
 }

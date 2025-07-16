@@ -1,5 +1,5 @@
-import { HTTPClient } from './http-client';
-import { RequestOptions } from '../types/client';
+import { HTTPClient } from "./http-client";
+import { RequestOptions } from "../types/client";
 
 /**
  * Base class for all API resource classes
@@ -16,7 +16,7 @@ export abstract class BaseAPI {
    */
   protected mergeOptions(
     options?: RequestOptions,
-    defaults?: RequestOptions
+    defaults?: RequestOptions,
   ): RequestOptions {
     return {
       ...defaults,

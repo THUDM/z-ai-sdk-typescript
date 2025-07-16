@@ -1,10 +1,10 @@
-import { BaseAPI } from '../core/base-api';
+import { BaseAPI } from "../core/base-api";
 import {
   ChatCompletionCreateParams,
   ChatCompletion,
   ChatCompletionChunk,
-} from '../types/chat';
-import { RequestOptions } from '../types/client';
+} from "../types/chat";
+import { RequestOptions } from "../types/client";
 
 /**
  * Chat completions API
@@ -15,7 +15,7 @@ export class Chat extends BaseAPI {
    */
   async create(
     params: ChatCompletionCreateParams,
-    options?: RequestOptions
+    options?: RequestOptions,
   ): Promise<ChatCompletion | NodeJS.ReadableStream> {
     const requestBody = {
       model: params.model,
@@ -37,7 +37,7 @@ export class Chat extends BaseAPI {
     };
 
     // Remove undefined values
-    Object.keys(requestBody).forEach(key => {
+    Object.keys(requestBody).forEach((key) => {
       if (requestBody[key as keyof typeof requestBody] === undefined) {
         delete requestBody[key as keyof typeof requestBody];
       }
@@ -50,10 +50,18 @@ export class Chat extends BaseAPI {
 
     try {
       if (params.stream) {
-        return this.client.stream('/chat/completions', requestBody, mergedOptions);
+        return this.client.stream(
+          "/chat/completions",
+          requestBody,
+          mergedOptions,
+        );
       }
-      
-      return await this.client.post<ChatCompletion>('/chat/completions', requestBody, mergedOptions);
+
+      return await this.client.post<ChatCompletion>(
+        "/chat/completions",
+        requestBody,
+        mergedOptions,
+      );
     } catch (error) {
       this.handleError(error);
     }
@@ -63,8 +71,8 @@ export class Chat extends BaseAPI {
    * Creates a streaming chat completion
    */
   async createStream(
-    params: Omit<ChatCompletionCreateParams, 'stream'>,
-    options?: RequestOptions
+    params: Omit<ChatCompletionCreateParams, "stream">,
+    options?: RequestOptions,
   ): Promise<NodeJS.ReadableStream> {
     const streamParams = { ...params, stream: true };
     return this.create(streamParams, options) as Promise<NodeJS.ReadableStream>;
@@ -80,7 +88,7 @@ export namespace Chat {
      * Creates a model response for the given chat conversation
      */
     create = super.create;
-    
+
     /**
      * Creates a streaming chat completion
      */

@@ -1,7 +1,7 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { ClientOptions, RequestOptions } from '../types/client';
-import { generateToken } from './auth';
-import { Z_AI_BASE_URL, ENV_API_KEY, ENV_BASE_URL } from './constants';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { ClientOptions, RequestOptions } from "../types/client";
+import { generateToken } from "./auth";
+import { Z_AI_BASE_URL, ENV_API_KEY, ENV_BASE_URL } from "./constants";
 
 /**
  * HTTP client for making requests to the ZAI API
@@ -12,21 +12,24 @@ export class HTTPClient {
   private cacheToken: boolean;
 
   constructor(options: ClientOptions) {
-    this.apiKey = options.apiKey || process.env[ENV_API_KEY] || '';
+    this.apiKey = options.apiKey || process.env[ENV_API_KEY] || "";
     this.cacheToken = options.cacheToken ?? true;
 
     if (!this.apiKey) {
-      throw new Error(`API key is required. Provide it via options.apiKey or ${ENV_API_KEY} environment variable.`);
+      throw new Error(
+        `API key is required. Provide it via options.apiKey or ${ENV_API_KEY} environment variable.`,
+      );
     }
 
-    const baseURL = options.baseURL || process.env[ENV_BASE_URL] || Z_AI_BASE_URL;
+    const baseURL =
+      options.baseURL || process.env[ENV_BASE_URL] || Z_AI_BASE_URL;
 
     this.client = axios.create({
       baseURL,
       timeout: options.timeout || 60000,
       headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': 'z-ai-sdk-typescript/1.0.0',
+        "Content-Type": "application/json",
+        "User-Agent": "z-ai-sdk-typescript/1.0.0",
         ...options.defaultHeaders,
       },
     });
@@ -46,7 +49,7 @@ export class HTTPClient {
           return Promise.reject(error.response.data);
         }
         return Promise.reject(error);
-      }
+      },
     );
   }
 
@@ -55,7 +58,7 @@ export class HTTPClient {
    */
   async get<T = any>(
     url: string,
-    config?: AxiosRequestConfig & RequestOptions
+    config?: AxiosRequestConfig & RequestOptions,
   ): Promise<T> {
     const response: AxiosResponse<T> = await this.client.get(url, config);
     return response.data;
@@ -67,9 +70,13 @@ export class HTTPClient {
   async post<T = any>(
     url: string,
     data?: any,
-    config?: AxiosRequestConfig & RequestOptions
+    config?: AxiosRequestConfig & RequestOptions,
   ): Promise<T> {
-    const response: AxiosResponse<T> = await this.client.post(url, data, config);
+    const response: AxiosResponse<T> = await this.client.post(
+      url,
+      data,
+      config,
+    );
     return response.data;
   }
 
@@ -79,7 +86,7 @@ export class HTTPClient {
   async put<T = any>(
     url: string,
     data?: any,
-    config?: AxiosRequestConfig & RequestOptions
+    config?: AxiosRequestConfig & RequestOptions,
   ): Promise<T> {
     const response: AxiosResponse<T> = await this.client.put(url, data, config);
     return response.data;
@@ -90,7 +97,7 @@ export class HTTPClient {
    */
   async delete<T = any>(
     url: string,
-    config?: AxiosRequestConfig & RequestOptions
+    config?: AxiosRequestConfig & RequestOptions,
   ): Promise<T> {
     const response: AxiosResponse<T> = await this.client.delete(url, config);
     return response.data;
@@ -102,12 +109,12 @@ export class HTTPClient {
   async postForm<T = any>(
     url: string,
     data: FormData,
-    config?: AxiosRequestConfig & RequestOptions
+    config?: AxiosRequestConfig & RequestOptions,
   ): Promise<T> {
     const response: AxiosResponse<T> = await this.client.post(url, data, {
       ...config,
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
         ...config?.headers,
       },
     });
@@ -120,11 +127,11 @@ export class HTTPClient {
   async stream(
     url: string,
     data?: any,
-    config?: AxiosRequestConfig & RequestOptions
+    config?: AxiosRequestConfig & RequestOptions,
   ): Promise<NodeJS.ReadableStream> {
     const response = await this.client.post(url, data, {
       ...config,
-      responseType: 'stream',
+      responseType: "stream",
     });
     return response.data;
   }
