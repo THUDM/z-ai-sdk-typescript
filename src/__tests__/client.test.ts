@@ -7,13 +7,10 @@ const MockedHTTPClient = HTTPClient as jest.MockedClass<typeof HTTPClient>;
 
 describe("ZAI Client", () => {
   let client: ZAI;
-  let mockHttpClient: jest.Mocked<HTTPClient>;
 
   beforeEach(() => {
     MockedHTTPClient.mockClear();
     client = new ZAI({ apiKey: "test-api-key" });
-    mockHttpClient = MockedHTTPClient.mock
-      .instances[0] as jest.Mocked<HTTPClient>;
   });
 
   describe("initialization", () => {

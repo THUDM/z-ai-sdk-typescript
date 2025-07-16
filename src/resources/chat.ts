@@ -2,7 +2,6 @@ import { BaseAPI } from "../core/base-api";
 import {
   ChatCompletionCreateParams,
   ChatCompletion,
-  ChatCompletionChunk,
 } from "../types/chat";
 import { RequestOptions } from "../types/client";
 
