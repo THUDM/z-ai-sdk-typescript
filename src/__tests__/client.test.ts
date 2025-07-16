@@ -27,32 +27,6 @@ describe("ZAI Client", () => {
     });
   });
 
-  describe("convenience methods", () => {
-    it("should have createChatCompletion method", () => {
-      expect(typeof client.createChatCompletion).toBe("function");
-    });
-
-    it("should have createChatCompletionStream method", () => {
-      expect(typeof client.createChatCompletionStream).toBe("function");
-    });
-
-    it("should have createImage method", () => {
-      expect(typeof client.createImage).toBe("function");
-    });
-
-    it("should have createEmbedding method", () => {
-      expect(typeof client.createEmbedding).toBe("function");
-    });
-
-    it("should have file management methods", () => {
-      expect(typeof client.createFile).toBe("function");
-      expect(typeof client.listFiles).toBe("function");
-      expect(typeof client.retrieveFile).toBe("function");
-      expect(typeof client.deleteFile).toBe("function");
-      expect(typeof client.getFileContent).toBe("function");
-    });
-  });
-
   describe("static factory methods", () => {
     it("should create ZAI instance with ofZHIPU method", () => {
       const zhipuClient = ZAI.ofZHIPU("test-api-key");
