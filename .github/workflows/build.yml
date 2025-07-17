@@ -5,7 +5,7 @@ on:
       - main
   push:
     branches:
-      - 'action*'
+      - "action*"
   workflow_call:
 
 jobs:
@@ -16,24 +16,24 @@ jobs:
         node-version: [18, 20]
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      
+          cache: "npm"
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Check code formatting
         run: npm run format:check
-      
+
       - name: Run lint
         run: npm run lint
-      
+
       - name: Run build
         run: npm run build
-      
+
       - name: Run tests
         run: npm test
