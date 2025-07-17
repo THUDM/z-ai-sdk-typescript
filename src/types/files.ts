@@ -3,9 +3,9 @@ import { BaseRequestOptions } from "./shared";
 /**
  * The intended purpose of the uploaded file
  */
-export type FilePurpose = 
+export type FilePurpose =
   | "batch"
-  | "retrieval" 
+  | "retrieval"
   | "file-extract"
   | "code-interpreter"
   | "fine-tune"

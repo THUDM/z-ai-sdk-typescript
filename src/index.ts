@@ -1,16 +1,16 @@
 // Main client export
-import { ZAI } from './client';
+import { ZAI } from "./client";
 export { ZAI };
 export default ZAI;
 
 // Type exports
-export * from './types';
+export * from "./types";
 
 // Core utilities
-export { generateToken, clearTokenCache, clearToken } from './core';
+export { generateToken, clearTokenCache, clearToken } from "./core";
 
 // Constants
-export * from './core/constants';
+export * from "./core/constants";
 
 // Resource classes for advanced usage
-export { Chat, Images, Embeddings, Files } from './resources';
+export { Chat, Images, Embeddings, Files } from "./resources";

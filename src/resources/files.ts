@@ -76,17 +76,18 @@ export class Files extends BaseAPI {
 
   /**
    * Returns information about a specific file
+   * Unavailable as of 2025-07-17
    */
-  async retrieve(
-    fileId: string,
-    options?: RequestOptions,
-  ): Promise<FileObject> {
-    try {
-      return await this.client.get<FileObject>(`/files/${fileId}`, options);
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
+  // async retrieve(
+  //   fileId: string,
+  //   options?: RequestOptions,
+  // ): Promise<FileObject> {
+  //   try {
+  //     return await this.client.get<FileObject>(`/files/${fileId}`, options);
+  //   } catch (error) {
+  //     this.handleError(error);
+  //   }
+  // }
 
   /**
    * Delete a file
