@@ -110,7 +110,7 @@ const hasApiKey = !!process.env.ZAI_API_KEY;
 
             // Limit the number of chunks we process for testing
             if (chunkCount >= 5) {
-              if ('destroy' in stream && typeof stream.destroy === 'function') {
+              if ("destroy" in stream && typeof stream.destroy === "function") {
                 stream.destroy();
               }
               expect(chunkCount).toBeGreaterThanOrEqual(1);
@@ -130,7 +130,7 @@ const hasApiKey = !!process.env.ZAI_API_KEY;
 
           // Timeout after 10 seconds
           setTimeout(() => {
-            if ('destroy' in stream && typeof stream.destroy === 'function') {
+            if ("destroy" in stream && typeof stream.destroy === "function") {
               stream.destroy();
             }
             if (chunkCount > 0) {
