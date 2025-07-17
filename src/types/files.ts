@@ -3,7 +3,15 @@ import { BaseRequestOptions } from "./shared";
 /**
  * The intended purpose of the uploaded file
  */
-export type FilePurpose = "fine-tune" | "assistants" | "batch";
+export type FilePurpose = 
+  | "batch"
+  | "retrieval" 
+  | "file-extract"
+  | "code-interpreter"
+  | "fine-tune"
+  | "fine-tune-function-calling"
+  | "fine-tune-vision-cogview"
+  | "fine-tune-vision-cogvlm";
 
 /**
  * The order to sort the files in
